@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// Задание 1. Фильтрация пользователей
+function getActiveUsers(users) {
+  return users.filter(user => user.isActive);
+}
+
+// Задание 2. Получение имён пользователей
+const getUserNames = (users) => users.map(user => user.name);
+
+// Задание 3. Поиск пользователя
+function findUserById(users, id) {
+  const foundUser = users.find(user => user.id === id);
+  return foundUser || null;
+}
+
+// Задание 4. Подсчёт статистики
+function getUsersStatistics(users) {
+  const activeCount = users.filter(user => user.isActive).length;
+  
+  return {
+    total: users.length,
+    active: activeCount,
+    inactive: users.length - activeCount
+  };
+}
+
+// Задание 5. Средний возраст
+function getAverageAge(users) {
+  if (users.length === 0) return 0;
+  
+  const totalAge = users.reduce((sum, user) => sum + user.age, 0);
+  return totalAge / users.length;
+}
+
+// Задание 6. Группировка пользователей по городу
+function groupUsersByCity(users) {
+  return users.reduce((grouped, user) => {
+    const city = user.city;
+    
+    if (!grouped[city]) {
+      grouped[city] = [];
+    }
+    
+    grouped[city].push(user);
+    return grouped;
+  }, {});
+}
+
+// Примеры использования функций:
+const users = [
+  { id: 1, name: "Anna", age: 22, city: "Moscow", isActive: true },
+  { id: 2, name: "Oleg", age: 17, city: "Kazan", isActive: false },
+  { id: 3, name: "Ivan", age: 30, city: "Moscow", isActive: true },
+  { id: 4, name: "Maria", age: 25, city: "Sochi", isActive: false }
+];
+
+console.log('Активные пользователи:', getActiveUsers(users));
+console.log('Имена пользователей:', getUserNames(users));
+console.log('Пользователь с id=3:', findUserById(users, 3));
+console.log('Пользователь с id=5:', findUserById(users, 5));
+console.log('Статистика:', getUsersStatistics(users));
+console.log('Средний возраст:', getAverageAge(users));
+console.log('Группировка по городам:', groupUsersByCity(users));
+    </script>
+</body>
+</html>
